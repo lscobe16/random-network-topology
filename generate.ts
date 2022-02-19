@@ -34,7 +34,9 @@ if (import.meta.main && Deno.args[0] !== undefined) {
         const parts = request.url.split("/");
         const non = parseInt(parts[parts.length - 1]);
 
-        const body = (non > 0) ? randomTree(non) : "add a number n after the / at the end of the URL to get a network n IPs";
+        const body = (non > 0)
+                   ? non <= 1e6 ? randomTree(non) : "nope"
+                   : "add a number n after the / at the end of the URL to get a network n IPs";
 
         return new Response(body, { status: 200 });
     }, { port: 80 });
