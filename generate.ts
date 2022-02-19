@@ -1,7 +1,5 @@
 import { serve } from "https://deno.land/std@0.126.0/http/server.ts";
 
-const ip = (i: number) => `0.0.0.${i}`;
-
 function randomIntBetween(a: number, b: number) {
     return Math.floor((Math.random() * (b-a+1)) + a);
 }
@@ -19,9 +17,9 @@ function randomTree(numberOfNodes: number) {
     if (numberOfNodes === 1) return nextIP();
 
     const subtrees = [nextIP()];
-    numberOfNodes--;
+    let rest = numberOfNodes - 1;
     while (numberOfNodes > 0) {
-        const rand = randomIntBetween(1, numberOfNodes/2);
+        const rand = randomIntBetween(1, Math.min(rest, numberOfNodes));
         subtrees.push(randomTree(rand));
         numberOfNodes -= rand;
     }
