@@ -18,10 +18,10 @@ function randomTree(numberOfNodes: number) {
 
     const subtrees = [nextIP()];
     let rest = numberOfNodes - 1;
-    while (numberOfNodes > 0) {
-        const rand = randomIntBetween(1, Math.min(rest, numberOfNodes));
+    while (rest > 0) {
+        const rand = randomIntBetween(1, rest);
         subtrees.push(randomTree(rand));
-        numberOfNodes -= rand;
+        rest -= rand;
     }
 
     return `(${subtrees.join(" ")})`;
